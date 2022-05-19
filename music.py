@@ -20,5 +20,11 @@ class music(commands.Cog):
     async def disconnect(self, ctx):
         await ctx.voice_client.disconnect()
 
+    @commands.command()
+    async def play(self, ctx, url):
+        ctx.voice_client.stop()
+        FFMPEG_OPTIONS = {'before_options': '-reconnect 1 - reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+        YDL_OPTIONS = {}
+
 def setup(client):
     client.add_cog(music(client))
